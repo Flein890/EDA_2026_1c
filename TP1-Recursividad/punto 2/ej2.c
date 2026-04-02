@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "../Headers/Headers.h"
 
 int producto(int,int);
 
