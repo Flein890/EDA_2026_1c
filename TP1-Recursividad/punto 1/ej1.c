@@ -38,7 +38,7 @@ void cadenaMinusculas(char *cad)   //Funcion convierte cadena a minusculas
     }
 }
 
-bool cadenaValida(char *cad)      //Funcion para validad 
+bool cadenaValida(char *cad)
 {
     for (int i = 0; i < strlen(cad); i++){
         if (isalpha(cad[i])){

@@ -1,4 +1,4 @@
-#include "./TP_Recur/TP_Recursividad.h"
+#include "../Headers/Headers.h"
 
 int main(void){
     int num;
@@ -15,7 +15,7 @@ int main(void){
        
     }
 
-    char * pe = reunionMafia(5); //validar que se ingrese un num
+    char * pe = reunionMafia(num); //validar que se ingrese un num
     printf("%s",pe);
     return 0;
 }
