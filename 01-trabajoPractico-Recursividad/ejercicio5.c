@@ -25,16 +25,17 @@ void auxr(char cadena[], char aux[], int i,int j,int tamaño){
 
 	}
 
+char * agregarSeparadorMiles(char numero[]){
+    static char aux[100];
+    auxr(numero, aux, 0, 0, strlen(numero));
+    return aux;
+}
+
 int main() {
     char cadena[50];
-    char aux[100];
 
-      printf("Ingrese cadena (maximo 49 caracteres): ");
+    printf("Ingrese cadena (maximo 49 caracteres): ");
     scanf("%49s", cadena);
-
-    if (strlen(cadena) == 49) {
-        printf("Error: Sobrepaso el numero permitido de caracteres\n");
-    }
 
     if (strlen(cadena) == 0) {
         printf("error: cadena vacia\n");
@@ -46,9 +47,8 @@ int main() {
         return 1;
     }
 
-    auxr(cadena, aux, 0, 0, strlen(cadena));
 
-    printf("Resultado: %s\n", aux);
+    printf("Resultado: %s\n", agregarSeparadorMiles(cadena));
 
     return 0;
 }
