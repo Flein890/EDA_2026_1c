@@ -20,23 +20,40 @@ float division(int m, int n, int d){
 }
 
 int main() {
-    int m, n;
+    int m, n, d;
     float resultado;
 
     printf("Ingrese el dividendo (m): ");
-    scanf("%d", &m);
+    if (scanf("%d", &m) != 1) {
+        printf("Error: debe ingresar un numero\n");
+        return 1;
+    }
 
     printf("Ingrese el divisor (n): ");
-    scanf("%d", &n);
+    if (scanf("%d", &n) != 1) {
+        printf("Error: debe ingresar un numero\n");
+        return 1;
+    }
 
-    if(n == 0){
+    printf("Ingrese cantidad de decimales (d): ");
+    if (scanf("%d", &d) != 1) {
+        printf("Error: debe ingresar un numero\n");
+        return 1;
+    }
+
+    if (n == 0){
         printf("Error: no se puede dividir por cero\n");
         return 1;
     }
 
-    resultado = division(m, n);
+    if (d < 0){
+        printf("Error: d no puede ser negativo\n");
+        return 1;
+    }
 
-    printf("Resultado: %.4f\n", resultado);
+    resultado = division(m, n, d);
+
+    printf("Resultado: %.*f\n", d, resultado);
 
     return 0;
 }
