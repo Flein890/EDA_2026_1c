@@ -1,40 +1,21 @@
 #include "tp_1_recursividad.h"
-#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
-float division(int m, int n){
-    static int d = -1;   
-    static int inicial = 1;
-
-    if (inicial != 0){
-        do{
-            printf("Ingresa un numero del 1 al 10 para indicar la cantidad de decimales que quiere");
-            scanf("%d", &d);
-
-            if (d < 1 || d > 10){
-                printf("Error: debe estar entre 1 y 10\n");
-            }
-
-        } while (d < 1 || d > 10);
-
-        inicial = 0;
-    }
+float division(int m, int n, int d){ 
 
     if (m < n){
-        if (m == 0 || d == 0){
-            inicial = 1;   
+        if (m == 0 || d == 0){  
             return 0;
         }
-        d--;
-        return division(m * 10, n) / 10.0;
+        return division(m * 10, n,d-1) / 10.0;
     }
 
-    return 1 + division(m - n, n);
+    return 1 + division(m - n, n,d);
 }
 
 int main() {
-    int m, n;
+    int m, n,d;
     float resultado;
 	
     printf("Ingrese el dividendo (m): ");
@@ -54,7 +35,15 @@ int main() {
         return 1;
     }
 
-    resultado = division(m, n);
+	 do{
+        printf("Ingresa un numero del 1 al 10 para indicar la cantidad de decimales que quiere: ");
+        scanf("%d", &d);
+        if (d < 1 || d > 10){
+            printf("Error: debe estar entre 1 y 10\n");
+        }
+    } while (d < 1 || d > 10);
+	
+    resultado = division(m, n,d);
 
     printf("Resultado: %f\n", resultado);
 
