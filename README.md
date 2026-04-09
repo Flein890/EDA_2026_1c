@@ -24,7 +24,7 @@ Villanova Franco : 206686
 email: emifran2812@outlook.com
 ------------------
 Cristian Herrera : 200839 
-email: 
+email: cristian46339@mail.com
 ------------------
 Cirigliano Julian : 190129
 email: 
