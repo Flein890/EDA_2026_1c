@@ -17,6 +17,7 @@ float division(int m, int n, int d){
 int main() {
     int m, n,d;
     float resultado;
+	int signo = 1;
 	
     printf("Ingrese el dividendo (m): ");
     if (scanf("%d", &m) != 1) {
@@ -35,6 +36,15 @@ int main() {
         return 1;
     }
 
+	if (m < 0){
+        m = -m;
+        signo *= -1;
+    }
+    if (n < 0){
+        n = -n;
+        signo *= -1;
+    }
+
 	 do{
         printf("Ingresa un numero del 1 al 10 para indicar la cantidad de decimales que quiere: ");
         scanf("%d", &d);
@@ -44,6 +54,7 @@ int main() {
     } while (d < 1 || d > 10);
 	
     resultado = division(m, n,d);
+	resultado = resultado * signo;
 
     printf("Resultado: %f\n", resultado);
 
