@@ -4,7 +4,19 @@
 
 int main (void){
 
-   bool evelda = divisiblePor7(32291);
+    int num;
+    int resultado;
+    printf("Ingrese un NUMERO para saber si es divisible por 7: ");
+    resultado = scanf("%d",&num);
+    while(resultado == 0){
+        printf("INVALIDO\n");
+        printf("Ingrese un NUMERO para saber si es divisible por 7: ");
+        while (getchar() != '\n'); // limpiar buffer
+        resultado = scanf("%d",&num);
+    }
+    
+    bool evelda = divisiblePor7(num);
+    printf("\n\n");
    printf("%s",evelda ? "true" : "false"); //uso el operador ternario, ya que bool en c toma valores de 0 y 1.
     return 0;
 }

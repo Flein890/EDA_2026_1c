@@ -20,7 +20,6 @@ int main (void){
 
     int fiboo = fibo(num);
     printf("%d",fiboo);
-    system("pause");
     return false;
 }
 
