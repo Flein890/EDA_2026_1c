@@ -68,7 +68,7 @@ void ejecutar_4(Lista l1, Lista l2)
     else
     {
         int res = CompararListas(l1, l2);
-        if(res == 3) printf("\n[RESPUESTA]: Las listas son iguales.");
+        if(res == 0) printf("\n[RESPUESTA]: Las listas son iguales.");
         else if(res == 1) printf("\n[RESPUESTA]: La lista L1 es mayor que L2.");
         else printf("\n[RESPUESTA]: La lista L2 es mayor que L1.");
     }

@@ -114,7 +114,7 @@ int CompararListas(Lista l1, Lista L2)
     free(i_l2);
     if(mayorl1 > mayorl2) return 1;
     else if(mayorl2 > mayorl1) return 2;
-    else return 3;
+    else return 0;
 }
 
 
