@@ -1,9 +1,10 @@
 #include "tp_2_listas.h"
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /*
-    Modificado por �ltima vez 27/04 - Cris
+    Modificado por ultima vez 28/04 - Franco
 */ 
 
 // Punto 2
@@ -118,4 +119,38 @@ int CompararListas(Lista l1, Lista L2)
 }
 
 
+//-----------------------------------------------------------------
+//--------------------------------EJ6------------------------------
+//-----------------------------------------------------------------
+
+
+bool esSublista(Lista l1,Lista l2){
+    TipoElemento X;
+    TipoElemento buscar;
+    Iterador i = iterador(l1);
     
+    if(l_longitud(l2) > l_longitud(l1)){
+        return false;
+    }
+    
+    while(hay_siguiente(i))
+    {
+        
+        X = siguiente(i);
+        buscar = l_buscar(l1,X->clave);
+        
+       if(buscar == NULL)
+       {
+           
+           return false;
+           
+       }
+        
+    }
+    
+    return true;
+}
+
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------

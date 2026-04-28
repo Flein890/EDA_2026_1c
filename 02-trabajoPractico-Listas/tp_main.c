@@ -75,6 +75,21 @@ void ejecutar_4(Lista l1, Lista l2)
     printf("\n[!] Para comparar las listas, se corren una por una, por ende, su complejidad algoritmica es LINEAL. [!]\n");
 }
 
+void ejecutar_6(Lista l1,Lista l2){
+   
+    if(esSublista(l1,l2))
+    {
+        printf("L2 es sublista de L1");
+        
+    }
+    else{
+        
+        printf("L2 NO es sublista de L1");
+        
+    }
+    
+}
+
 void mostrarmenu_principal(Lista l1, Lista l2)
 {
     int seleccion;
@@ -127,8 +142,10 @@ void respuesta_menu(int seleccion, Lista l1, Lista l2)
         }
         case 5:
         {
+            ejecutar_6(l1,l2);
             limpiar_c();
             mostrarmenu_principal(l1,l2);
+            
             break;
         }
         case 6:
