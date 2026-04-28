@@ -1,0 +1,98 @@
+#include "tp_2_listas.h"
+#include <time.h>
+#include <stdlib.h>
+
+/*
+    Modificado por última vez 27/04 - Cris
+*/ 
+
+// Punto 2
+
+Lista verElementosRepetidos(Lista l1, Lista l2)
+{
+    Lista rest = l_crear();
+    Iterador i_l1 = iterador(l1);
+
+    while (hay_siguiente(i_l1)) 
+    {
+        TipoElemento te = siguiente(i_l1);
+        if(l_buscar(l2, te->clave) != NULL)
+        {
+            l_agregar(rest, te);
+        }
+    }
+    free(i_l1);
+    return rest;
+}
+
+Lista verElementosQueNoSeRepiten(Lista l1, Lista l2)
+{
+    Lista rest = l_crear();
+    Iterador i_l1 = iterador(l1);
+
+    while (hay_siguiente(i_l1)) 
+    {
+        TipoElemento te = siguiente(i_l1);
+        if(l_buscar(l2, te->clave) == NULL)
+        {
+            l_agregar(rest, te);
+        }
+    }
+    free(i_l1);
+    return rest;
+}
+
+float promedio(Lista l1)
+{
+    Iterador i_l1 = iterador(l1);
+    int acum = 0;
+    int max = l_longitud(l1);
+    while(hay_siguiente(i_l1))
+    {
+        TipoElemento te = siguiente(i_l1);
+        acum += te->clave;
+    }
+    float rest = (float)acum/max;
+    free(i_l1);
+    return rest;
+}
+
+ResultadoValorMinimo valorMinimo(Lista l1, Lista l2)
+{
+    Iterador i_l1 = iterador(l1);
+    Iterador i_l2 = iterador(l2);
+    ResultadoValorMinimo rest;
+    int pos = 1;
+
+    if(l_es_vacia(l1)){rest.valor = l_recuperar(l1,1)->clave; rest.pos = 1;}
+    if(l_es_vacia(l2)){rest.valor_2 = l_recuperar(l2, 1)->clave; rest.pos = 1;}
+
+    while(hay_siguiente(i_l1))
+    {   
+        TipoElemento te = siguiente(i_l1);
+        if((te->clave) < rest.valor)
+        {
+            rest.valor = te->clave;
+            rest.pos = pos;
+        }
+        pos++;
+    }
+
+    pos = 1;
+    while(hay_siguiente(i_l2))
+    {   
+        TipoElemento te = siguiente(i_l2);
+        if((te->clave) < rest.valor)
+        {
+            rest.valor_2 = te->clave;
+            rest.pos_2 = pos;
+        }
+        pos++;
+    }
+    free(i_l1);
+    free(i_l2);
+    return rest;
+}
+
+
+    
