@@ -118,6 +118,48 @@ int CompararListas(Lista l1, Lista L2)
     else return 0;
 }
 
+//-----------------------------------------------------------------
+//----------------------------Ejercicio 3--------------------------
+//-----------------------------------------------------------------
+
+ResultadosMul multiplo(Lista l1, Lista l2){
+    int resto = 0;
+    int escalar = 0;
+    ResultadosMul resultado;
+    TipoElemento te1 = te_crear(0);
+    TipoElemento te2 = te_crear(0);
+    Iterador ite1 = iterador(l1);
+    Iterador ite2 = iterador(l2);
+    te1 = siguiente(ite1);
+    te2 = siguiente(ite2);
+
+    int auxEscalar = te2->clave / te1->clave;
+    resultado.esMultiplo = true;
+    resultado.escalar = true;
+
+    while(hay_siguiente(ite1) && hay_siguiente(ite2)){
+        resto = te2->clave % te1->clave;
+        if(resto != 0){
+            resultado.esMultiplo = false;
+            resultado.escalar = false;
+            resultado.numEscalar = 0;
+            break;
+        }
+        escalar = te2->clave / te1->clave;
+        if(escalar != auxEscalar && resultado.escalar == true){
+            resultado.escalar = false;
+            resultado.numEscalar = 0;
+        }
+        te1 = siguiente(ite1);
+        te2 = siguiente(ite2);
+    }
+
+    if(resultado.escalar == true){
+        resultado.numEscalar = escalar;
+    }
+
+    return resultado;
+}
 
 //-----------------------------------------------------------------
 //--------------------------------EJ6------------------------------
