@@ -154,6 +154,13 @@ ResultadosMul multiplo(Lista l1, Lista l2){
         te2 = siguiente(ite2);
     }
 
+    resto = te2->clave % te1->clave; // Ejecuto de nuevo para el ultimo elemento
+    if(resto != 0){
+        resultado.esMultiplo = false;
+        resultado.escalar = false;
+        resultado.numEscalar = 0;
+    }
+
     if(resultado.escalar == true){
         resultado.numEscalar = escalar;
     }
