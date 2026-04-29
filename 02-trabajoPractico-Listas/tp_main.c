@@ -61,6 +61,20 @@ void ejecutar_2E(Lista l1, Lista l2)
    }
 }
 
+void ejecutar_3(Lista l1,Lista l2){
+    ResultadosMul resultado;
+    resultado = multiplo(l1, l2);
+
+    if(resultado.esMultiplo == true){
+            printf("\nLa lista 2 es multiplo de la lista 1\n");
+            if(resultado.escalar == true){
+                printf("Su escalar es %i", resultado.numEscalar);
+            }
+            else {printf("No tiene escalar");}
+        }
+        else{printf("\nLa lista 2 NO es multiplo de la lista 1");}
+}
+
 void ejecutar_4(Lista l1, Lista l2)
 {
     if(l_es_vacia(l1) || l_es_vacia(l2)) printf("\n[ERROR] Atencion: Una(s) de las listas esta vacia, deberan tener al menos una clave.\n");
@@ -123,6 +137,7 @@ void respuesta_menu(int seleccion, Lista l1, Lista l2)
         }
         case 2:
         {
+            ejecutar_3(l1, l2);
             limpiar_c();
             mostrarmenu_principal(l1,l2);
             break;
