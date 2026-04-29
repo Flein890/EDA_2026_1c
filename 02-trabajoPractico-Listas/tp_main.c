@@ -61,18 +61,19 @@ void ejecutar_2E(Lista l1, Lista l2)
    }
 }
 
-void ejecutar_3(Lista l1,Lista l2){
+void ejecutar_3(Lista l1,Lista l2)
+{
+    if(l_es_vacia(l1) || l_es_vacia(l2)) printf("\n[ERROR] Atencion: Una(s) de las listas esta vacia, deberan tener al menos una clave.\n"); return;
     ResultadosMul resultado;
     resultado = multiplo(l1, l2);
-
     if(resultado.esMultiplo == true){
-            printf("\nLa lista 2 es multiplo de la lista 1\n");
+            printf("\n [RESPUESTA]: La lista 2 es multiplo de la lista 1\n");
             if(resultado.escalar == true){
-                printf("Su escalar es %i", resultado.numEscalar);
+                printf("[RESPUESTA]: Su escalar es %i", resultado.numEscalar);
             }
-            else {printf("No tiene escalar");}
+            else {printf("[RESPUESTA]: No tiene escalar");}
         }
-        else{printf("\nLa lista 2 NO es multiplo de la lista 1");}
+        else{printf("\n[RESPUESTA]: La lista 2 NO es multiplo de la lista 1");}
 }
 
 void ejecutar_4(Lista l1, Lista l2)
@@ -93,12 +94,12 @@ void ejecutar_6(Lista l1,Lista l2){
    
     if(esSublista(l1,l2))
     {
-        printf("L2 es sublista de L1");
+        printf("[RESPUESTA]: L2 es sublista de L1.\n");
         
     }
     else{
         
-        printf("L2 NO es sublista de L1");
+        printf("[RESPUESTA]: L2 NO es sublista de L1.\n");
         
     }
     

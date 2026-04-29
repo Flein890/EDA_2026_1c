@@ -1,6 +1,6 @@
 #include "../headers/tp_validaciones.h"
 
-const char* c_prohibidos = " \t\"',:;[]{}&~";
+const char* c_prohibidos = " /\t\"',:;[]{}&~";
 
 const char* TipoDatoToString(TipoDatoIngresado tipo)
 {
@@ -226,5 +226,5 @@ char* IngresarSoloLetras()
 //======================//
 
 /*
-    Modificado por última vez 27/04 - Cris
+    Modificado por ï¿½ltima vez 27/04 - Cris
 */ 

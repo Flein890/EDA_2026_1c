@@ -176,7 +176,7 @@ ResultadosMul multiplo(Lista l1, Lista l2){
 bool esSublista(Lista l1,Lista l2){
     TipoElemento X;
     TipoElemento buscar;
-    Iterador i = iterador(l1);
+    Iterador i = iterador(l2);
     
     if(l_longitud(l2) > l_longitud(l1)){
         return false;
