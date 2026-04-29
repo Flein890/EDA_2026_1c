@@ -12,7 +12,9 @@
                 //"../01-trabajoPractico-Recursividad/tp_1_Recursividad.c",
                 "../02-trabajoPractico-Listas/tp_2_Listas.c",
                 //===// Core.
-                "../libs/listas/implementaciones/listas_arreglos.c",
+                //"../libs/listas/implementaciones/listas_arreglos.c",
+                //"../libs/listas/implementaciones/listas_cursores.c",
+                "../libs/listas/implementaciones/listas_punteros.c",
                 "../libs/tipoElemento/implementaciones/tipo_elemento.c",
                 //===// Validaciones.
                 "../libs/validaciones/implementaciones/tp_validaciones.c",

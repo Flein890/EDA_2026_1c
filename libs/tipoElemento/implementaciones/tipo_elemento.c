@@ -1,4 +1,3 @@
-
 #include "../headers/tipo_elemento.h"
 #include <stdlib.h>
 
