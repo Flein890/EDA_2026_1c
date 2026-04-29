@@ -11,8 +11,9 @@
 //===========// Prototipos MENU.
 void respuesta_menu(int seleccion, Lista l1, Lista l2);
 void respuesta_submenu(int seleccion, Lista l1, Lista l2);
-void mostrarmenu_principal(Lista l1, Lista l2);
-void mostrarmenu_submenu(Lista l1, Lista l2);
+int mostrarmenu_principal(Lista l1, Lista l2);
+int mostrarmenu_submenu(Lista l1, Lista l2);
+void pasointermedio_submenu(Lista l1, Lista l2);
 void cargar_lista(Lista l1);
 void limpiar_terminal_c();
 void limpiar_c();
@@ -63,7 +64,7 @@ void ejecutar_2E(Lista l1, Lista l2)
 
 void ejecutar_3(Lista l1,Lista l2)
 {
-    if(l_es_vacia(l1) || l_es_vacia(l2)) printf("\n[ERROR] Atencion: Una(s) de las listas esta vacia, deberan tener al menos una clave.\n"); return;
+    if(l_es_vacia(l1) || l_es_vacia(l2)){printf("\n[ERROR] Atencion: Una(s) de las listas esta vacia, deberan tener al menos una clave.\n"); return;}
     ResultadosMul resultado;
     resultado = multiplo(l1, l2);
     if(resultado.esMultiplo == true){
@@ -105,14 +106,14 @@ void ejecutar_6(Lista l1,Lista l2){
     
 }
 
-void mostrarmenu_principal(Lista l1, Lista l2)
+int mostrarmenu_principal(Lista l1, Lista l2)
 {
     int seleccion;
     printf("===================================================================================\n ");
     printf("\t\t\t\t >> TP 2: Listas - Grupo 3\n\n");
     printf("\n\t\t [!] > Elija que ejercicio ejecutar < [!]");
     printf("\n\n\t\t [1]: Ejercicios Punto 2.\n\t\t [2]: Multiplo.\n\t\t [3]: Comparar Listas.");
-    printf("\n\t\t [4]: Polinomio.\n\t\t [5]: Sublista.");
+    printf("\n\t\t [4]: Polinomio.\n\t\t [5]: Sublista.\n\n\t\t [0]: Salir.");
     printf("\n\n [!] Seleccione '6' o '7' para modificar cada lista desde este menu [!]");
     printf("\n\n [6] L1 - ");
     verlista_estilizado(l1);
@@ -121,68 +122,57 @@ void mostrarmenu_principal(Lista l1, Lista l2)
     printf("===================================================================================\n ");
     do
     {
-        printf(" [!]: Ingrese una opcion. (1 - 7)");
+        printf(" [!]: Ingrese una opcion. (0 - 7)");
         IngresarEntero(SIGNO_POSITIVO, false, &seleccion);
-    } while (seleccion == 0 || seleccion > 7);
-    respuesta_menu(seleccion, l1, l2);
+    } while (seleccion > 7);
+    //respuesta_menu(seleccion, l1, l2);
+    return seleccion;
 }
+
 void respuesta_menu(int seleccion, Lista l1, Lista l2)
 {
     switch(seleccion)
     {
         case 1:
         {
-            limpiar_c();
-            mostrarmenu_submenu(l1,l2);
+            pasointermedio_submenu(l1,l2);
             break;
         }
         case 2:
         {
             ejecutar_3(l1, l2);
-            limpiar_c();
-            mostrarmenu_principal(l1,l2);
             break;
         }
         case 3:
         {
             ejecutar_4(l1, l2);
-            limpiar_c();
-            mostrarmenu_principal(l1,l2);
             break;
         }
         case 4:
         {
-            limpiar_c();
-            mostrarmenu_principal(l1,l2);
             break;
         }
         case 5:
         {
             ejecutar_6(l1,l2);
-            limpiar_c();
-            mostrarmenu_principal(l1,l2);
-            
             break;
         }
         case 6:
         {
             cargar_lista(l1);
-            limpiar_c();
-            mostrarmenu_principal(l1,l2);
             break;
         }
         case 7:
         {
             cargar_lista(l2);
-            limpiar_c();
-            mostrarmenu_principal(l1,l2);
             break;
         }
         default: mostrarmenu_principal(l1,l2);
     }
+    limpiar_c();
 }
 
-void mostrarmenu_submenu(Lista l1, Lista l2)
+int mostrarmenu_submenu(Lista l1, Lista l2)
 {
     int seleccion;
     printf("===================================================================================\n ");
@@ -201,8 +191,21 @@ void mostrarmenu_submenu(Lista l1, Lista l2)
         printf(" [!]: Ingrese una opcion. (1 - 6)");
         IngresarEntero(SIGNO_POSITIVO, false, &seleccion);
     } while (seleccion == 0 || seleccion > 6);
-    respuesta_submenu(seleccion, l1, l2);
+    return seleccion;
 }
+
+void pasointermedio_submenu(Lista l1, Lista l2) {  // EVITA RECURSION INDIRECTA EN LOS SUBMENUS
+    int seleccion;
+    do
+    {
+        seleccion = mostrarmenu_submenu(l1, l2); 
+        if (seleccion != 6)
+        {
+            respuesta_submenu(seleccion, l1, l2);
+        }
+    } while (seleccion != 6); 
+}
+
 void respuesta_submenu(int seleccion, Lista l1, Lista l2)
 {
     switch(seleccion)
@@ -210,45 +213,31 @@ void respuesta_submenu(int seleccion, Lista l1, Lista l2)
         case 1:
         {
             ejecutar_2A(l1, l2);
-            limpiar_c();
-            mostrarmenu_submenu(l1, l2);
             break;
         }
         case 2:
         {
             ejecutar_2B(l1, l2);
-            limpiar_c();
-            mostrarmenu_submenu(l1, l2);
             break;
         }
         case 3:
         {
             ejecutar_2C(l1, l2);
-            limpiar_c();
-            mostrarmenu_submenu(l1, l2);
             break;
         }
         case 4:
         {
             ejecutar_2D(l1, l2);
-            limpiar_c();
-            mostrarmenu_submenu(l1, l2);
             break;
         }
         case 5:
         {
             ejecutar_2E(l1, l2);
-            limpiar_c();
-            mostrarmenu_submenu(l1, l2);
-            break;
-        }
-        case 6:
-        {
-            mostrarmenu_principal(l1, l2);
             break;
         }
         default: mostrarmenu_submenu(l1, l2);
     }
+    limpiar_c();
 }
 //===//
 void limpiar_terminal_c() {
@@ -263,14 +252,23 @@ void limpiar_c()
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-int main()
-{
+int main() {
     Lista l1 = l_crear();
     Lista l2 = l_crear();
     srand(time(NULL));
-    mostrarmenu_principal(l1, l2);
-}
 
+    int seleccion;
+    do
+    {
+        seleccion = mostrarmenu_principal(l1, l2); 
+        if (seleccion != 0)
+        {
+            respuesta_menu(seleccion, l1, l2);
+        }
+    }while (seleccion != 0);
+    printf("\nSaliendo del programa...\n");
+    return 0;
+}
 //==========//
 // Funciones de carga.
 void limpiar_lista(Lista l)

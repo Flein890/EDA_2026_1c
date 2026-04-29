@@ -82,10 +82,10 @@ ResultadoValorMinimo valorMinimo(Lista l1, Lista l2)
     pos = 1;
     while(hay_siguiente(i_l2))
     {   
-        TipoElemento te = siguiente(i_l2);
-        if((te->clave) < rest.valor)
+        TipoElemento te2 = siguiente(i_l2);
+        if((te2->clave) < rest.valor_2)
         {
-            rest.valor_2 = te->clave;
+            rest.valor_2 = te2->clave;
             rest.pos_2 = pos;
         }
         pos++;
