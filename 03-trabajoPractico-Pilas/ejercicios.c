@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include <time.h>
-#include <math.h>
+
 
 //PROTOTIPOS
 char* convertirEnCadena(Pila p);
@@ -281,3 +280,156 @@ void eliminarClaveRecursiva(Pila auxiliar, Pila nuevaPila, int clave){
     eliminarClaveRecursiva(auxiliar,nuevaPila,clave);
 }
 
+// EJERCICIO 7
+ void rellenar_pila(Pila p1, Pila aux){
+        while(!p_es_vacia(aux)){
+            TipoElemento e1 = p_desapilar(aux);
+            p_apilar(p1,e1);
+        }
+    }
+
+Pila p_ej7_elementoscomunes(Pila p1, Pila p2){
+    Pila pAux = p_crear();
+    Pila pAux2 = p_crear();
+    Pila coincidencias = p_crear();
+    // pararme el primer elemento de p1, comparar con todos los de p2, si alguno es igual
+    // sumarlo a otra pila llamada coincidencias, caso contrario no se hace nada, repito proceso
+    // con hasta terminar p1. usando apilar y desapilar
+
+
+    while(!p_es_vacia(p1)){
+        TipoElemento e1;
+        e1 = p_desapilar(p1);
+        while(!p_es_vacia(p2)){
+            TipoElemento e2;
+            e2 = p_desapilar(p2);
+            if(e1->clave == e2->clave){
+                p_apilar(coincidencias,e1);
+            }
+            p_apilar(pAux2,e2);
+        }
+        rellenar_pila(p2,pAux2);
+        p_apilar(pAux,e1);
+    }
+
+    return coincidencias;
+};
+
+
+// EJERCICIO 8
+
+Pila valRep(Pila P);
+
+Pila p_ej8_sacarrepetidos(Pila P){
+    // Pila P = p_crear();
+    Pila PR = p_crear();
+    Pila paux= p_crear();
+    TipoElemento Y;
+    int clave;
+    int c = 0; // Contador de elementos
+    bool b;
+
+    // do{
+    //     b = ingresoEntero(&clave, &c);
+    //     if(b) p_apilar(P,te_crear(clave));
+
+    // }while(b);
+
+    p_mostrar(P);
+
+    PR = valRep(P); //PR contiene los elementos resultantes
+
+    return PR; //repetidos
+}
+
+
+Pila copia_p(Pila pila) {
+    TipoElemento X;
+    Pila pAux = p_crear();
+    Pila pCopia = p_crear();
+    while(!p_es_vacia(pila))
+    {
+        X = p_desapilar(pila);
+        p_apilar(pAux, X);
+    }
+
+    while(!p_es_vacia(pAux))
+    {
+        X = p_desapilar(pAux);
+        p_apilar(pila, X);
+        p_apilar(pCopia, X);
+    }
+    return pCopia;
+}
+
+TipoElemento contarClave(Pila pila, int c) {
+    TipoElemento Y, J;
+    int*cont =(int*)malloc(sizeof(int));  //Reservo memoria al contador
+    *cont=0;
+    Pila pAux=p_crear();
+
+    while(!p_es_vacia(pila))
+    {
+        Y = p_desapilar(pila);
+        if (c == Y->clave){
+            (*cont)++;
+        }
+        p_apilar(pAux, Y);
+    }
+    J = te_crear_con_valor(c, cont);
+
+    while(!p_es_vacia(pAux))
+    {
+        p_apilar(pila, p_desapilar(pAux));
+    }
+
+    return J;
+}
+
+bool buscarClave(Pila pila, TipoElemento Y)
+{
+	Pila pAux = p_crear();
+	TipoElemento X;
+	bool b = false;
+
+	while (!p_es_vacia(pila))
+	{
+		X = p_desapilar(pila);
+		if (X->clave == Y->clave){ //Si la clave esta en la pila, b es true .. en caso de no entrar al if, b es false
+			b = true;
+		}
+		p_apilar(pAux, X);
+	}
+	while (!p_es_vacia(pAux))
+	{
+		p_apilar(pila,p_desapilar(pAux));
+	}
+
+	return b;
+}
+
+
+Pila valRep(Pila P) {
+    Pila pCopia = copia_p(P);
+    Pila pCopia2 = copia_p(P);
+    Pila pAux= p_crear();
+    TipoElemento X;
+    Pila PR = p_crear();
+    TipoElemento J;
+
+    while(!p_es_vacia(pCopia))
+    {
+        X = p_desapilar(pCopia);
+
+        J = contarClave(pCopia2, X->clave);
+
+        if(!buscarClave(pAux,X))
+        {
+           p_apilar(PR, J);
+        }
+
+        p_apilar(pAux,X);
+    }
+
+    return PR;
+}

@@ -12,6 +12,8 @@ void respuesta_menu(int seleccion, Pila p1);
 void pasointermedio_submenu(Pila p1);
 void respuesta_submenu(int seleccion, Pila p1);
 void mostrarcarga(Pila p, Pila p2, bool restrictivo, int max); 
+void carga_manual_l(Pila a, int elementos);
+void carga_manual_sl(Pila a);
 /* 
     - p: Pila destino. sobre ella se actuara
     - p2 - Pila origen (clonar), utilizada para la opcion de clonacion. se toma como pila a clonar en p. 
@@ -86,13 +88,28 @@ void ejecutar_6(Pila p1)
 {
     printf("6");
 }
-void ejecutar_7(Pila p1)
+void ejecutar_7(Pila p)
 {
-    printf("7");
+    Pila p2 = p_crear();
+    printf("Carga de la pila 2: \n");
+    carga_manual_sl(p2);
+    Pila con =  p_ej7_elementoscomunes(p,p2);
+    printf("\n\nCoincidencias: \n\n");
+    p_mostrar(con);
+
 }
 void ejecutar_8(Pila p1)
 {
-    printf("8");
+    Pila rep = p_ej8_sacarrepetidos(p1);
+    printf("\nRepeticiones:\n");
+    while(!p_es_vacia(rep))
+    {
+      TipoElemento Y = p_desapilar(rep);
+
+      printf("%d:%d ", Y->clave, *((int*)Y->valor));
+    }
+    system("Pause");
+
 }
 
 //
