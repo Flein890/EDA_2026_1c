@@ -133,7 +133,7 @@ void carga_manual_l(Pila a, int elementos)
     {
         printf("[!]: Ingrese un valor entero como clave. [Restantes a cargar: %d]\n",elementos-i);
         int valor;
-        ingresarEntero(SIGNO_NO_IMPORTA, false, &valor);
+        IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
         TipoElemento x = te_crear(valor);
         p_apilar(a, x);
     }
@@ -149,7 +149,7 @@ void carga_manual_sl(Pila a)
     {
         int valor;
         TipoElemento x;
-        seguir = ingresarEntero(SIGNO_NO_IMPORTA, true, &valor);
+        seguir = IngresarEntero(SIGNO_NO_IMPORTA, true, &valor);
         if(seguir)
         { 
             x = te_crear(valor);
@@ -177,7 +177,7 @@ void cargar_pila_auto(Pila p, int max)
         int valor;
         do
         {
-            ingresarEntero(SIGNO_POSITIVO, false, &valor);
+            IngresarEntero(SIGNO_POSITIVO, false, &valor);
         } while (valor <= 0 || valor > TAMANIO_MAXIMO);
         cargarpilarand(p, valor);
         printf("[!]: Pila cargada.");
@@ -227,7 +227,7 @@ void mostrarcarga(Pila p, Pila p2, bool restrictivo, int max)
     do
     {
         printf("[!]: Ingrese una opcion. (1 - %d)\n", omax);
-        ingresarEntero(SIGNO_POSITIVO, false, &opcion);
+        IngresarEntero(SIGNO_POSITIVO, false, &opcion);
     } while (opcion < 1  ||  opcion > omax);
 
     if(opcion == 1) cargar_manual(p, max);
@@ -255,7 +255,7 @@ int mostrarmenu_principal(Pila p1)
     do
     {
         printf(" [!]: Ingrese una opcion. (1 - 9)");
-        ingresarEntero(SIGNO_POSITIVO, false, &seleccion);
+        IngresarEntero(SIGNO_POSITIVO, false, &seleccion);
     } while (seleccion > 9);
     return seleccion;
 }
@@ -324,7 +324,7 @@ int mostrarmenu_submenu(Pila p1)
     do
     {
         printf(" [!]: Ingrese una opcion. (1 - 8)");
-        ingresarEntero(SIGNO_POSITIVO, false, &seleccion);
+        IngresarEntero(SIGNO_POSITIVO, false, &seleccion);
     } while (seleccion == 0 || seleccion > 8);
     return seleccion;
 }
