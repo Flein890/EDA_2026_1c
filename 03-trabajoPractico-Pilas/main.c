@@ -74,7 +74,13 @@ void ejecutar_2_6(Pila p1)
 }
 void ejecutar_3(Pila p1)
 {
-    printf("3");
+    Pila p2 = p_crear();
+    printf("Carga de la Pila 2: \n");
+    carga_manual_sl(p2);
+    bool res = p_ej3_iguales(p1,p2);
+    printf("\n");
+    printf("%s",res?"Las pilas comparadas son IGUALES":"Las pilas comparadas son DIFERENTES");
+    printf("\n");
 }
 void ejecutar_4(Pila p1)
 {
