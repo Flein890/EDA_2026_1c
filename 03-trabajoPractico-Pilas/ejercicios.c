@@ -300,17 +300,18 @@ Pila p_ej7_elementoscomunes(Pila p1, Pila p2){
     while(!p_es_vacia(p1)){
         TipoElemento e1;
         e1 = p_desapilar(p1);
-        while(!p_es_vacia(p2)){
+        while(!p_es_vacia(p2) && !p_es_vacia(p1)){
             TipoElemento e2;
             e2 = p_desapilar(p2);
             if(e1->clave == e2->clave){
-                p_apilar(coincidencias,e1);
+                p_apilar(coincidencias,e2);
             }
             p_apilar(pAux2,e2);
         }
-        rellenar_pila(p2,pAux2);
+        rellenar_pila(p2,pAux2); //sin la coincidencia anterior
         p_apilar(pAux,e1);
     }
+    rellenar_pila(p1,pAux);
 
     return coincidencias;
 };
