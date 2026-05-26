@@ -97,6 +97,7 @@ void ejecutar_7(Pila p)
     printf("\n\nCoincidencias: \n\n");
     p_mostrar(con);
 
+
 }
 void ejecutar_8(Pila p1)
 {
@@ -108,8 +109,7 @@ void ejecutar_8(Pila p1)
 
       printf("%d:%d ", Y->clave, *((int*)Y->valor));
     }
-    system("Pause");
-
+    printf("\n\n");
 }
 
 //
