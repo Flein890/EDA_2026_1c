@@ -88,11 +88,21 @@ void ejecutar_4(Pila p1)
 }
 void ejecutar_5(Pila p1)
 {
-    printf("5");
+    Pila p = p_ej5_invertir(p1);
+    printf("Pila Invertida:\n");
+    p_mostrar(p);
+    printf("\n");
 }
 void ejecutar_6(Pila p1)
 {
-    printf("6");
+    int * clave;
+    printf("Ingrese clave a borrar: \n");
+    IngresarEntero(0, false, clave);
+    Pila p = p_ej6_eliminarclave(p1,*clave);
+    printf("Elemento eliminado: \n");
+    p_mostrar(p);
+
+
 }
 void ejecutar_7(Pila p)
 {
