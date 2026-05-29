@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <math.h>
 #include "../libs/validaciones/headers/tp_validaciones.h"
-#include "pilas.h"
 #include "tp_pilas.h"
 
 //------//
@@ -87,14 +86,16 @@ void ejecutar_2_2(Pila p1)
 void ejecutar_2_3(Pila p1)
 {
     int valor;
-    printf("\n[!]: Por favor, ingrese el valor de clave a eliminar.\n");
-    IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
-    p_ej2_eliminarclave(p1, valor);
-
-    printf("[RESPUESTA]: ");
-    p_mostrar(p1);
+    if(p_es_vacia(p1)) printf("[!] Su pila se encuentra vacia! Debe contener al menos un valor.\n");
+    else
+    {
+        printf("\n[!]: Por favor, ingrese el valor de clave a eliminar.\n");
+        IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
+        p_ej2_eliminarclave(p1, valor);
+        printf("[RESPUESTA]: ");
+        p_mostrar(p1);
+    }
 }
-
 void ejecutar_2_4(Pila p1)
 {
     int elementos = p_ej2_cantidadelementos(p1);

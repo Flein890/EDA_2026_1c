@@ -311,6 +311,7 @@ Pila p_ej6_eliminarclave(Pila p, int clave)
     return prest; 
 }
 
+
 // [!]: Recursivo - Lineal
 Pila p_ej6_eliminarclave_r(Pila p, int clave)
 {
