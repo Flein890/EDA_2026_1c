@@ -257,9 +257,9 @@ Pila  p_ej5_invertir(Pila p){
 
 // EJERCICIO 6
 
-Pila p_ej6_eliminarclave(Pila p, int clave){
-    TipoElemento te;
-    Pila auxiliar = p_crear();
+/*Pila p_ej6_eliminarclave(Pila p, int clave){                  // No termina siendo ni iterativo al 100%
+    TipoElemento te;                                            // Ni recursivo al 100%
+    Pila auxiliar = p_crear();                                  
     Pila nuevaPila = p_crear();
 
     while(!p_es_vacia(p)){
@@ -286,6 +286,43 @@ void eliminarClaveRecursiva(Pila auxiliar, Pila nuevaPila, int clave){
         p_apilar(nuevaPila,te);
     }
     eliminarClaveRecursiva(auxiliar,nuevaPila,clave);
+}*/
+
+// [!]: Iterativo: Complejidad Lineal.
+
+Pila p_ej6_eliminarclave(Pila p, int clave)
+{
+    Pila paux = p_crear(),
+         prest = p_crear();
+
+    while (!p_es_vacia(p))
+    {   
+        p_apilar(paux, p_desapilar(p));
+    }
+    while(!p_es_vacia(paux))
+    {
+        TipoElemento x = p_desapilar(paux);
+        p_apilar(p, x);
+        if(x->clave != clave) {
+            p_apilar(prest, x);
+        }
+    }
+
+    return prest; 
+}
+
+// [!]: Recursivo - Lineal
+Pila p_ej6_eliminarclave_r(Pila p, int clave)
+{
+    if (p_es_vacia(p)) return p_crear();  // Base
+
+    TipoElemento x = p_desapilar(p); 
+
+    Pila nuevaPila = p_ej6_eliminarclave_r(p, clave); 
+    
+    p_apilar(p, x); // rearma la pila original
+    if (x->clave != clave) p_apilar(nuevaPila, x); 
+    return nuevaPila; 
 }
 
 // EJERCICIO 7
@@ -428,13 +465,13 @@ Pila valRep(Pila P) {
     Pila PR = p_crear();
     TipoElemento J;
 
-    while(!p_es_vacia(pCopia))
+    while(!p_es_vacia(pCopia))                      // N
     {
-        X = p_desapilar(pCopia);
+        X = p_desapilar(pCopia);                    
 
-        J = contarClave(pCopia2, X->clave);
+        J = contarClave(pCopia2, X->clave);     // N * (N)
 
-        if(!buscarClave(pAux,X))
+        if(!buscarClave(pAux,X))                // N * (N + N) = 2N"2 = O(N"2)
         {
            p_apilar(PR, J);
         }

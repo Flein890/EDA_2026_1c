@@ -162,6 +162,7 @@ void ejecutar_4(Pila p1)
 
     char * rest = p_ej4_cambiarbase(valor, base);
 
+    printf("[RESPUESTA]: Complejidad Algoritmica: Lineal");
     printf("[RESPUESTA]: %s", rest);
 }
 
@@ -171,6 +172,7 @@ void ejecutar_5(Pila p1)
     printf("[RESPUESTA]: Pila Invertida:\n");
     p_mostrar(p);
     printf("\n");
+    printf("[RESPUESTA]: Complejidad Algoritmica: Lineal");
 }
 void ejecutar_6(Pila p1)
 {
@@ -178,11 +180,16 @@ void ejecutar_6(Pila p1)
     printf("Ingrese clave a borrar: \n");
     IngresarEntero(0, false, &valor);
     Pila p = p_ej6_eliminarclave(p1,valor);
-    printf("[RESPUESTA]: Elemento eliminado: \n");
+    printf("[RESPUESTA]: Elemento eliminado (ITERATIVO): \n");
     p_mostrar(p);
+    printf("[RESPUESTA]: Complejidad Algoritmica (ITERATIVO): Lineal");
 
-
+    Pila p2 = p_ej6_eliminarclave_r(p1, valor);
+    printf("\n\n[RESPUESTA]: Elemento eliminado (RECURSIVO): \n");
+    p_mostrar(p2);
+    printf("[RESPUESTA]: Complejidad Algoritmica (RECURSIVO): Lineal");
 }
+
 void ejecutar_7(Pila p)
 {
     Pila p2 = p_crear();
@@ -191,12 +198,12 @@ void ejecutar_7(Pila p)
     Pila con =  p_ej7_elementoscomunes(p,p2);
     printf("\n\n[RESPUESTA]: Coincidencias: \n\n");
     p_mostrar(con);
-
-
+    printf("[RESPUESTA]: Complejidad Algoritmica: Cuadratica");
 }
 void ejecutar_8(Pila p1)
 {
     Pila rep = p_ej8_sacarrepetidos(p1);
+    printf("[RESPUESTA]: Complejidad Algoritmica: Lineal");
     printf("\n[RESPUESTA]: Repeticiones:\n");
     while(!p_es_vacia(rep))
     {
@@ -205,6 +212,7 @@ void ejecutar_8(Pila p1)
       printf("%d:%d ", Y->clave, *((int*)Y->valor));
     }
     printf("\n\n");
+    printf("[RESPUESTA]: Complejidad Algoritmica: Cuadratica");
 }
 
 //
