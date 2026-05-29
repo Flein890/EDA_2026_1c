@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "../libs/validaciones/headers/tp_validaciones.h"
+#include "pilas.h"
 #include "tp_pilas.h"
 
 //------//
@@ -50,28 +51,91 @@ int main()
 
 void ejecutar_2_1(Pila p1)
 {
-    printf("21");
+    int valor;
+    printf("\n [!]: Acontinuacion ingrese la clave a verificar.");
+    IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
+    bool rest = p_ej2_existeclave(p1, valor);
+    printf("[RESPUESTA]: La clave %d %sexiste. \n", valor, rest ? "" : "NO ");
 }
 void ejecutar_2_2(Pila p1)
 {
-    printf("22");
+    int elementos = p_ej2_cantidadelementos(p1);
+    if(elementos != 0)
+    {
+        int pos;
+        int valor;
+        do
+        {
+            printf("\n [!]: Por favor, ingrese la posicion ordinal donde sera insertada la clave. [1 a %d].", elementos);
+            IngresarEntero(SIGNO_POSITIVO, false, &pos);
+        } while(pos > elementos);
+
+        printf("\n[!]: Por favor, ingrese el valor que debera tomar la clave.\n");
+        IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
+
+        TipoElemento x = te_crear(valor);
+        p_ej2_colocarelemento(p1, pos, x);
+
+        if(elementos == TAMANIO_MAXIMO) printf("\n[ADVERTENCIA]: La pila estaba llena. El elemento '%d' ha sido insertado en la posicion %d, \n\t pero por desplazamiento se ha perdido definitivamente el tope original (Posicion 1).\n", valor, pos);
+
+        printf("[RESPUESTA]: ");
+        p_mostrar(p1);
+    }
+    else printf("[!] Su pila se encuentra vacia! Debe contener al menos un valor.\n");
 }
+
 void ejecutar_2_3(Pila p1)
 {
-    printf("23");
+    int valor;
+    printf("\n[!]: Por favor, ingrese el valor de clave a eliminar.\n");
+    IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
+    p_ej2_eliminarclave(p1, valor);
+
+    printf("[RESPUESTA]: ");
+    p_mostrar(p1);
 }
+
 void ejecutar_2_4(Pila p1)
 {
-    printf("24");
+    int elementos = p_ej2_cantidadelementos(p1);
+    if(elementos >= 2)
+    {
+        int pos, pos2;
+        int valor;
+        do
+        {
+            printf("\n [!]: Por favor, ingrese la PRIMERA posicion a intercambiar [1 a %d].", elementos);
+            IngresarEntero(SIGNO_POSITIVO, false, &pos);
+        } while(pos > elementos);
+
+        do
+        {
+            printf("\n [!]: Por favor, ingrese la SEGUNDA posicion a intercambiar [1 a %d] y [pos2 != pos1 (%d)].", elementos, pos);
+            IngresarEntero(SIGNO_POSITIVO, false, &pos2);
+        } while(pos2 > elementos || pos2 == pos);
+
+        p_ej2_intercambiarposiciones(p1, pos, pos2);
+
+        printf("[RESPUESTA]: ");
+        p_mostrar(p1);
+    }
+    else printf("[!] Su pila se encuentra vacia o incompleta! Debe tener almenos dos valores.\n");    
 }
+
 void ejecutar_2_5(Pila p1)
 {
-    printf("25");
+    printf("[RESPUESTA]: Original ");
+    p_mostrar(p1);
+
+    printf("[RESPUESTA]: Duplicado ");
+    p_mostrar(p_ej2_duplicar(p1));
 }
+
 void ejecutar_2_6(Pila p1)
 {
-    printf("26");
+    printf("\n[RESPUESTA]: La pila contiene %d elementos.", p_ej2_cantidadelementos(p1));
 }
+
 void ejecutar_3(Pila p1)
 {
     Pila p2 = p_crear();
@@ -79,27 +143,42 @@ void ejecutar_3(Pila p1)
     carga_manual_sl(p2);
     bool res = p_ej3_iguales(p1,p2);
     printf("\n");
-    printf("%s",res?"Las pilas comparadas son IGUALES":"Las pilas comparadas son DIFERENTES");
+    printf("[RESPUESTA]: %s",res?"Las pilas comparadas son IGUALES":"Las pilas comparadas son DIFERENTES");
     printf("\n");
 }
 void ejecutar_4(Pila p1)
 {
-    printf("4");
+    int valor, base;
+    printf("[!]: Ingrese el valor entero a cambiar de base: \n");
+    IngresarEntero(SIGNO_NO_IMPORTA, false, &valor);
+
+    printf("[!]: Ingrese la base a la que se cambiara (2 a 16): \n");
+    IngresarEntero(SIGNO_POSITIVO, false, &base);
+    if((base < 2  || base > 16)) printf("[!]: La base esta fuera del rango, se devuelve el valor ingresado.\n");
+
+    int n = valor < 0 ? -valor : valor;
+    int digitos = (int)(log10(n) / log10(base)) + 1;
+    if(digitos > TAMANIO_MAXIMO) printf("[ADVERTENCIA]: El valor %d en base %d necesita %d digitos. La pila unicamente puede representar %d!\n", valor, base, digitos, TAMANIO_MAXIMO);
+
+    char * rest = p_ej4_cambiarbase(valor, base);
+
+    printf("[RESPUESTA]: %s", rest);
 }
+
 void ejecutar_5(Pila p1)
 {
     Pila p = p_ej5_invertir(p1);
-    printf("Pila Invertida:\n");
+    printf("[RESPUESTA]: Pila Invertida:\n");
     p_mostrar(p);
     printf("\n");
 }
 void ejecutar_6(Pila p1)
 {
-    int * clave;
+    int valor;
     printf("Ingrese clave a borrar: \n");
-    IngresarEntero(0, false, clave);
-    Pila p = p_ej6_eliminarclave(p1,*clave);
-    printf("Elemento eliminado: \n");
+    IngresarEntero(0, false, &valor);
+    Pila p = p_ej6_eliminarclave(p1,valor);
+    printf("[RESPUESTA]: Elemento eliminado: \n");
     p_mostrar(p);
 
 
@@ -110,7 +189,7 @@ void ejecutar_7(Pila p)
     printf("Carga de la pila 2: \n");
     carga_manual_sl(p2);
     Pila con =  p_ej7_elementoscomunes(p,p2);
-    printf("\n\nCoincidencias: \n\n");
+    printf("\n\n[RESPUESTA]: Coincidencias: \n\n");
     p_mostrar(con);
 
 
@@ -118,7 +197,7 @@ void ejecutar_7(Pila p)
 void ejecutar_8(Pila p1)
 {
     Pila rep = p_ej8_sacarrepetidos(p1);
-    printf("\nRepeticiones:\n");
+    printf("\n[RESPUESTA]: Repeticiones:\n");
     while(!p_es_vacia(rep))
     {
       TipoElemento Y = p_desapilar(rep);
@@ -208,7 +287,7 @@ void cargar_manual(Pila p, int max)
     while (!p_es_vacia(p)) p_desapilar(p);
     if(max == -1)
     {
-        printf("[!]: Atencion, comenzara la carga de la pila (Valores Maximos: %d).\n[!]: Ingrese 'exit' sin un valor previo para cargar una lista vacia o para terminar la carga.", TAMANIO_MAXIMO);
+        printf("[!]: Atencion, comenzara la carga de la pila (Valores Maximos: %d).\n[!]: Ingrese 'exit' sin un valor previo para cargar una pila vacia o para terminar la carga.", TAMANIO_MAXIMO);
         carga_manual_sl(p);
     }  
     else carga_manual_l(p, max);

@@ -190,6 +190,14 @@ char*  p_ej4_cambiarbase(int nrobasedecimal, int nrootrabase){
     TipoElemento te;
     Pila p = p_crear();
 
+    if (nrootrabase < 2 || nrootrabase > 16)
+    {
+        resultado = calloc(20, sizeof(char)); 
+        sprintf(resultado, "%i", nrobasedecimal); 
+        free(p); 
+        return resultado; 
+    }
+
     while(nrobasedecimal != 0){
         te = te_crear(nrobasedecimal % nrootrabase);
         p_apilar(p,te);
