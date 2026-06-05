@@ -143,7 +143,7 @@ bool c_ej3_iguales(Cola c1, Cola c2){
         res = false;
     }
 
-    while(cantidadElementosC1 == cantidadElementosC2 && cant < cantidadElementosC1){ 
+    while(!c_es_vacia(c1) && cantidadElementosC1 == cantidadElementosC2 && cant < cantidadElementosC1){ 
         TipoElemento e1 = c_desencolar(c1);
         TipoElemento e2 = c_desencolar(c2);
         if(e1->clave != e2->clave){
