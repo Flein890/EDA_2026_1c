@@ -127,3 +127,34 @@ Cola c_ej2_invertir(Cola c){
 
 
 //------------------------------3-----------------------------
+//	Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos 
+// (solo comparar por la clave),
+// 	sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar.
+//  */
+// retorna true si son exactamente iguales, caso contrario retorna false.
+bool c_ej3_iguales(Cola c1, Cola c2){
+   
+    int cantidadElementosC1 = c_ej2_contarelementos(c1);
+    int cantidadElementosC2 = c_ej2_contarelementos(c2);
+    int cant = 0;
+    bool res = true;
+
+    if(cantidadElementosC1 != cantidadElementosC2){
+        res = false;
+    }
+
+    while(cantidadElementosC1 == cantidadElementosC2 && cant < cantidadElementosC1){ 
+        TipoElemento e1 = c_desencolar(c1);
+        TipoElemento e2 = c_desencolar(c2);
+        if(e1->clave != e2->clave){
+            res = false;
+        }
+        c_encolar(c1,e1);
+        c_encolar(c2,e2);
+        cant++;
+    }
+
+return res;
+};
+
+//------------------------------4-----------------------------
