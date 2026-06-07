@@ -187,6 +187,49 @@ return res;
 };
 
 //------------------------------4-----------------------------
+Cola  c_ej4_colanorepetidos(Cola c){
+    int ocurrencias = 0;
+    TipoElemento te,te2;
+    Iterador ite,ite2;
+    Lista l = l_crear();
+    Cola aux = c_crear();
+
+    if(c_es_vacia(c)){
+        return aux;
+    }
+    while(!c_es_vacia(c)){
+        te = c_desencolar(c);
+        c_encolar(aux,te);
+        l_agregar(l,te);
+    }
+    while(!c_es_vacia(aux)){
+        te = c_desencolar(aux);
+        c_encolar(c,te);
+    }
+    ite = iterador(l);
+    ite2 = iterador(l);
+    while(hay_siguiente(ite)){
+        te = siguiente(ite);
+        while(hay_siguiente(ite2)){
+            te2 = siguiente(ite2);
+            if(te->clave == te2->clave){
+                ocurrencias++;
+                if(ocurrencias > 1){
+                    break;
+                }
+            }
+        }
+        if(ocurrencias < 2){
+            c_encolar(aux,te);
+        }
+        ocurrencias = 0;
+        ite2 = iterador(l);
+    }
+    return aux;
+}
+
+//------------------------------5-----------------------------
+
 
 //------------------------------6-----------------------------
 
