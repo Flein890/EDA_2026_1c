@@ -1,6 +1,8 @@
-#include "tp_4_colas.h"
+#include "tp_colas.h"
 #include "../libs/pilas/headers/pilas.h"
-
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 //------------------------------2-----------------------------
 
@@ -27,15 +29,14 @@ bool c_ej2_existeclave(Cola c, int clave){
 
 //  b.	Agregar un nuevo elemento en una posición dada (colarse).
 // Retorna la nueva cola con el elemento insertado, caso contrario la cola original recibida.
-Cola c_ej2_colarelemento(Cola c, int posicionordinal){
+Cola c_ej2_colarelemento(Cola c, int posicionordinal, TipoElemento x){
     Cola aux = c_crear();
     bool agregado = false;
     int pos = 1;
-    TipoElemento aAgregar = te_crear(777);
 
     while(!c_es_vacia(c)){
         if(!agregado && pos == posicionordinal){ //validar rango? posicionordinal se puede exceder del limite / simplemente no lo agrega?
-            c_encolar(aux,aAgregar);
+            c_encolar(aux,x);
             agregado = true;
         }
         TipoElemento e = c_desencolar(c);
@@ -111,7 +112,8 @@ Cola c_ej2_copiar(Cola c){
 
 //  f.	Invertir el contenido de una cola sin destruir la cola original.
 // Retorna la cola al reves (invertida), no debe perserse la original. Si es vacia retorna vacia.
-Cola c_ej2_invertir(Cola c){
+
+/*Cola c_ej2_invertir(Cola c){
     Pila invertir = p_crear();
     Cola aux = c_crear();
     while(!c_es_vacia(c)){
@@ -123,9 +125,36 @@ Cola c_ej2_invertir(Cola c){
         c_encolar(c,e);
     }
     return c;
-};
+};*/
 
+Cola c_ej2_invertir(Cola c)
+{
+    Cola aux = c_crear();
+    Pila invertir = p_crear();
+    Cola resultado = c_crear();
 
+    while (!c_es_vacia(c))
+    { 
+        // vacio y reconstruyo la original
+        TipoElemento te = c_desencolar(c);
+        c_encolar(aux, te);
+        TipoElemento te_copia = te_crear(te->clave);
+        p_apilar(invertir, te_copia);
+    }
+    while (!c_es_vacia(aux))
+    {
+        TipoElemento te = c_desencolar(aux);
+        c_encolar(c, te);
+    }
+    while (!p_es_vacia(invertir))
+    {
+        TipoElemento te = p_desapilar(invertir);
+        c_encolar(resultado, te);
+    }
+    free(aux);
+    free(invertir);
+    return resultado;
+}
 //------------------------------3-----------------------------
 //	Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos 
 // (solo comparar por la clave),
@@ -158,3 +187,69 @@ return res;
 };
 
 //------------------------------4-----------------------------
+
+//------------------------------6-----------------------------
+
+Lista c_ej6_comunesapilaycola(Pila p, Cola c)
+{
+    Lista listaComunes = l_crear();
+    Pila pilaAux = p_crear();
+
+    TipoElemento elemento;
+    TipoElemento elemento2;
+    TipoElemento elementoPos;
+
+    int posP = 1;
+
+    while(!p_es_vacia(p))
+    {
+        elemento = p_desapilar(p);
+        
+        p_apilar(pilaAux, elemento); 
+
+        bool comunes = false;
+        int posC = 1;
+
+        Cola colaAux = c_ej2_copiar(c); 
+
+        while(!c_es_vacia(colaAux) && !comunes)
+        {
+            elemento2 = c_desencolar(colaAux);
+            if(elemento->clave == elemento2->clave) {
+                comunes = true;
+            } else {
+                posC++;
+            }
+        }
+
+        // sinoserepite
+        if(comunes && l_buscar(listaComunes, elemento->clave) == NULL)
+        {
+            char buffer[20];
+            sprintf(buffer, "%d:%d", posP, posC);
+
+            char *valor = malloc(strlen(buffer) + 1); 
+            strcpy(valor, buffer);
+
+            elementoPos = te_crear_con_valor(elemento->clave, valor);
+            l_agregar(listaComunes, elementoPos);
+        }
+
+        while(!c_es_vacia(colaAux)) {
+            c_desencolar(colaAux);
+        }
+        free(colaAux);
+
+        posP++;
+    }
+
+    while(!p_es_vacia(pilaAux))
+    {
+        elemento = p_desapilar(pilaAux);
+        p_apilar(p, elemento);
+    }
+
+    free(pilaAux);
+
+    return listaComunes;
+}

@@ -1,6 +1,8 @@
 #ifndef TIPO_ELEMENTO_H
 #define TIPO_ELEMENTO_H
 
+static const int TAMANIO_MAXIMO = 10;
+
 struct TipoElementoRep {
     int clave;
     void* valor;
