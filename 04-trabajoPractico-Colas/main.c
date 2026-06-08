@@ -166,12 +166,13 @@ void ejecutar7()
     Cola cola1 = c_crear();
     Cola cola2 = c_crear();
     Cola cola3 = c_crear();
+    Cola aux = c_crear();
 
-    printf("COLA 1: Ingrese los minutos de atencion para cada cliente\n");
+    printf("COLA 1: Ingrese los minutos de atencion que requerira cada cliente\n");
     mostrarcarga_cola(cola1);
-    printf("COLA 2: Ingrese los minutos de atencion para cada cliente\n");    
+    printf("COLA 2: Ingrese los minutos de atencion que requerira cada cliente\n");    
     mostrarcarga_cola(cola2);
-    printf("COLA 3: Ingrese los minutos de atencion para cada cliente\n");
+    printf("COLA 3: Ingrese los minutos de atencion que requerira cada cliente\n");
     mostrarcarga_cola(cola3);
 
     int Q;
@@ -189,12 +190,25 @@ void ejecutar7()
     } while (Q == 0);
 
    Cola res =  c_ej7_atenderclientes(cola1, cola2, cola3, Q);
+
+    if (c_es_vacia(res)) {
+        printf("No hubo clientes atendidos!\n");
+        return;
+    }
+
     while (!c_es_vacia(res)) {
 
-        TipoElemento x = c_desencolar(res);
+        TipoElemento e = c_desencolar(res);
 
-     printf("Clave: %d\n", x->clave);
-     printf("Texto: %s\n", (char*)x->valor);
+     printf("Clave: %d\n", e->clave);
+     printf("Texto: %s\n", (char*)e->valor);
+
+     c_encolar(aux,e);
+}
+
+while(!c_es_vacia(aux)){
+    TipoElemento e = c_desencolar(aux);
+    c_encolar(res,e);
 }
 
 
