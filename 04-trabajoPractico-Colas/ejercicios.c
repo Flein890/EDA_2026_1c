@@ -301,3 +301,85 @@ Lista c_ej6_comunesapilaycola(Pila p, Cola c)
 
     return listaComunes;
 }
+
+//------------------------------7-----------------------------
+
+
+bool atender_cliente(Cola c1, int Q) {
+
+    TipoElemento x = c_recuperar(c1);
+
+    x->clave -= Q;
+
+    if (x->clave <= 0) {
+        c_desencolar(c1);
+        return true;
+    }
+
+    return false;
+}
+
+
+Cola c_ej7_atenderclientes(Cola cola1, Cola cola2, Cola cola3, int Q) {
+    Cola resultado = c_crear();
+
+    if (c_es_vacia(cola1) &&
+        c_es_vacia(cola2) &&
+        c_es_vacia(cola3)) {
+        return resultado;
+    }
+
+    int pos1 = 1;
+    int pos2 = 1;
+    int pos3 = 1;
+
+    while (!c_es_vacia(cola1) || !c_es_vacia(cola2) || !c_es_vacia(cola3)) {
+
+       if (!c_es_vacia(cola1)) {
+
+        if (atender_cliente(cola1, Q)) {
+
+            char *texto = malloc(50);
+            sprintf(texto, "Cliente %d Cola 1", pos1);
+
+            TipoElemento nuevo = te_crear_con_valor(1, texto);
+
+            c_encolar(resultado, nuevo);
+
+            pos1++;
+    }
+}
+
+    if (!c_es_vacia(cola2)) {
+
+        if (atender_cliente(cola2, Q)) {
+
+            char *texto = malloc(50);
+            sprintf(texto, "Cliente %d Cola 2", pos2);
+
+            TipoElemento nuevo = te_crear_con_valor(2, texto);
+
+            c_encolar(resultado, nuevo);
+
+            pos2++;
+    }
+}
+
+        if (!c_es_vacia(cola3)) {
+
+     if (atender_cliente(cola3, Q)) {
+
+        char *texto = malloc(50);
+        sprintf(texto, "Cliente %d Cola 3", pos3);
+
+        TipoElemento nuevo =te_crear_con_valor(3, texto);
+
+        c_encolar(resultado, nuevo);
+
+        pos3++;
+    }
+}
+    }
+
+    return resultado;
+}

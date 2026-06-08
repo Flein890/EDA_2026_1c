@@ -163,7 +163,41 @@ void ejecutar6()
 }
 void ejecutar7()
 {
-    printf("7");
+    Cola cola1 = c_crear();
+    Cola cola2 = c_crear();
+    Cola cola3 = c_crear();
+
+    printf("COLA 1: Ingrese los minutos de atencion para cada cliente\n");
+    mostrarcarga_cola(cola1);
+    printf("COLA 2: Ingrese los minutos de atencion para cada cliente\n");    
+    mostrarcarga_cola(cola2);
+    printf("COLA 3: Ingrese los minutos de atencion para cada cliente\n");
+    mostrarcarga_cola(cola3);
+
+    int Q;
+    bool b;
+
+    printf("Ingresa el tiempo de atencion al cliente\n");
+
+    do {
+        b = IngresarEntero(0,false,&Q);
+
+        if (Q == 0) {
+            printf("Ingresa minutos > 0\n");
+        }
+
+    } while (Q == 0);
+
+   Cola res =  c_ej7_atenderclientes(cola1, cola2, cola3, Q);
+    while (!c_es_vacia(res)) {
+
+        TipoElemento x = c_desencolar(res);
+
+     printf("Clave: %d\n", x->clave);
+     printf("Texto: %s\n", (char*)x->valor);
+}
+
+
 }
 
 //-- Menu Principal
