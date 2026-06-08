@@ -225,6 +225,11 @@ Cola  c_ej4_colanorepetidos(Cola c){
         ocurrencias = 0;
         ite2 = iterador(l);
     }
+    printf("\nCola original: \n");
+    c_mostrar(c);
+    printf("Cola resultado: \n");
+    c_mostrar(aux);
+    printf("Complejidad: Cuadratica\n");
     return aux;
 }
 
