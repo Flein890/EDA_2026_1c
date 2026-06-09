@@ -135,12 +135,13 @@ void ejecutar3()
     c_mostrar_2(c2);
 
     printf("[RESULTADO]: Las colas C1 y C2 son %s", rest ? "IGUALES" : "DESIGUALES");
+    printf("\n[RESULTADO]: Complejidad Algoritmica: Lineal.");
 }
 void ejecutar4()
 {
     Cola c1 = c_crear();
     mostrarcarga_cola(c1);
-    c_ej5_divisortotal(c1); //Muestra la salida dentro de la funcion
+    c_ej4_colanorepetidos(c1); //Muestra la salida dentro de la funcion
 }
 void ejecutar5()
 {
@@ -148,7 +149,22 @@ void ejecutar5()
     Cola c2 = c_crear();
     mostrarcarga_cola(c1);
     c2 = c_ej5_divisortotal(c1);
-    c_mostrar_2(c2);
+
+    if (c_es_vacia(c2)) printf("  [!] No se encontraron divisores parciales ni totales.\n");
+    else
+    {
+        while(!c_es_vacia(c2))
+        {
+            TipoElemento te = c_desencolar(c2);
+            bool* es_total = (bool*)te->valor;
+            if (*es_total == true){
+                printf("  [ %2d ] -> DIVISOR TOTAL   (Divide a todos)\n", te->clave);
+            } else {
+                printf("  [ %2d ] -> DIVISOR PARCIAL (Divide a la mitad o mas)\n", te->clave);
+            }
+        }
+    }
+    printf("\n[RESULTADO]: Complejidad Algoritmica: Cuadratica.");
 }
 void ejecutar6()
 {
@@ -166,6 +182,8 @@ void ejecutar6()
     c_mostrar_2(c1);
     printf("[!]: Pila Devuelta: "); 
     p_mostrar_2(p1);
+
+    printf("\n[RESULTADO]: Complejidad Algoritmica: Cuadratica.");
 }
 void ejecutar7()
 {
