@@ -140,7 +140,7 @@ void ejecutar4()
 {
     Cola c1 = c_crear();
     mostrarcarga_cola(c1);
-    c_ej5_divisortotal(c1);
+    c_ej5_divisortotal(c1); //Muestra la salida dentro de la funcion
 }
 void ejecutar5()
 {
