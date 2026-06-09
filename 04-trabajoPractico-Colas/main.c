@@ -148,7 +148,7 @@ void ejecutar5()
     Cola c2 = c_crear();
     mostrarcarga_cola(c1);
     c2 = c_ej5_divisortotal(c1);
-    c:mostrar_2(c2);
+    c_mostrar_2(c2);
 }
 void ejecutar6()
 {
