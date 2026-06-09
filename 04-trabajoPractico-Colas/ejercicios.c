@@ -234,7 +234,53 @@ Cola  c_ej4_colanorepetidos(Cola c){
 }
 
 //------------------------------5-----------------------------
+Cola  c_ej5_divisortotal(Cola c){
+    bool total;
+    int longitudLista;
+    int contador = 0;
+    TipoElemento te,te2;
+    Iterador ite,ite2;
+    Lista l = l_crear();
+    Cola aux = c_crear();
 
+    if(c_es_vacia(c)){
+        return aux;
+    }
+    while(!c_es_vacia(c)){
+        te = c_desencolar(c);
+        c_encolar(aux,te);
+        l_agregar(l,te);
+    }
+    while(!c_es_vacia(aux)){
+        te = c_desencolar(aux);
+        c_encolar(c,te);
+    }
+    ite = iterador(l);
+    ite2 = iterador(l);
+    longitudLista = l_longitud(l);
+    while(hay_siguiente(ite)){
+        te = siguiente(ite);
+        while(hay_siguiente(ite2)){
+            te2 = siguiente(ite2);
+            if((te2->clave % te->clave) == 0){
+                contador++;
+            }
+        }
+        if(contador == longitudLista){
+            total = true;
+            te->valor = total;
+            c_encolar(aux,te);
+        }
+        if(contador >= (longitudLista/2)){
+            total = false;
+            te->valor = total;
+            c_encolar(aux,te);
+        }
+        contador = 0;
+        ite2 = iterador(l);
+    }
+    return aux;
+}
 
 //------------------------------6-----------------------------
 
