@@ -138,11 +138,17 @@ void ejecutar3()
 }
 void ejecutar4()
 {
-    printf("4");
+    Cola c1 = c_crear();
+    mostrarcarga_cola(c1);
+    c_ej5_divisortotal(c1);
 }
 void ejecutar5()
 {
-    printf("5");
+    Cola c1 = c_crear();
+    Cola c2 = c_crear();
+    mostrarcarga_cola(c1);
+    c2 = c_ej5_divisortotal(c1);
+    c:mostrar_2(c2);
 }
 void ejecutar6()
 {
