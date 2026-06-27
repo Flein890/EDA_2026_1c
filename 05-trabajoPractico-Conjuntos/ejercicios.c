@@ -71,23 +71,26 @@ Conjunto c_ej3_intersecciones(Lista l_de_conjuntos)
 
 //==============================EJERCICIO 4=================================
 
+bool esSubconjunto(Conjunto A, Conjunto B)
+{
+    Conjunto dif = cto_diferencia(A, B);
 
+    bool resultado = cto_es_vacio(dif);
 
-bool c_ej4_transitividad(Conjunto A, Conjunto B,Conjunto C){ //usar C
-    if(cto_cantidad_elementos(A) > cto_cantidad_elementos(B)){
-        return false;
-    }
-
-    Conjunto X = cto_diferencia(A, B);
-    Conjunto Y = cto_diferencia(B, A);
-
-    if(!cto_es_vacio(X)) return false;
-    else if(cto_es_vacio(Y)) return false;
-
-    free(X);
-    free(Y);
-    return true;
+    return resultado;
 }
+
+bool c_ej4_transitividad(Conjunto A, Conjunto B, Conjunto C)
+{
+    if(esSubconjunto(A, B) && esSubconjunto(B, C))
+        return esSubconjunto(A, C);
+
+    return false;
+}
+
+//complejidad ej4: cto_diferencia() tiene complejidad O(n²) ,esSubconjunto() realiza una sola diferencia, por lo que también es O(n²).
+//la complejidad final es de O(n²) + O(n²) = O(n²)
+
 
 
 //==============================EJERCICIO 5=================================
