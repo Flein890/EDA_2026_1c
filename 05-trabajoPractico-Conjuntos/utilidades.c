@@ -19,8 +19,9 @@ Conjunto ingresarConjunto(){
             break;
         }
     }
-    printf("\nIngrese elementos para el conjunto: ");
+    
     for(int i = 0; i<num; i++){
+        printf("\nIngrese elemento del conjunto: ");
         scanf("%i",&clave);
         te = te_crear(clave);
         cto_agregar(c,te);
