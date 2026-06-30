@@ -21,6 +21,7 @@ void mostrarMenu(){
     printf("Ejecutar ejercicio 2 union (ingresar 21)\n");
     printf("Ejecutar ejercicio 2 interserccion (ingresar 22)\n");
     printf("Ejecutar ejercicio 2 diferencia (ingresar 23)\n");
+    printf("Ejecutar ejercicio 2 pertenencia (ingresar 24)\n");
     printf("Ejecutar ejercicio 3 union (ingresar 31)\n");
     printf("Ejecutar ejercicio 3 interseccion (ingresar 32)\n");
     printf("Ejecutar ejercicio 4 (ingresar 4)\n");
@@ -68,6 +69,16 @@ void controlador(){
                 c3 = c_ej2_diferencia(c1,c2);
                 printf("\nResultado: ");
                 cto_mostrar(c3);
+                break;
+            case 24:
+                c1 = ingresarConjunto();
+                printf("\nIngrese una clave: ");
+                scanf("%i",&num);
+                resultado = c_ej2_pertenece(c1, num);
+                if(resultado){
+                    printf("La clave pertenece al conjunto\n");
+                }
+                else{printf("La clave NO pertenece al conjunto\n");}
                 break;
             case 31:
                 l = ingresarListaDeConjuntos();
