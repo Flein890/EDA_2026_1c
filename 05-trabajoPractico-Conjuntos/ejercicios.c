@@ -21,7 +21,7 @@ Conjunto c_ej2_diferencia(Conjunto A, Conjunto B)
     return cto_diferencia(A, B);
 }
 
-Conjunto c_ej2_pertenece(Conjunto A, int clave)
+bool c_ej2_pertenece(Conjunto A, int clave)
 {
     return cto_pertenece(A, clave);
 }
