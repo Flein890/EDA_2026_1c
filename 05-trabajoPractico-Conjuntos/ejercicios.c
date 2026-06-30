@@ -20,6 +20,11 @@ Conjunto c_ej2_diferencia(Conjunto A, Conjunto B)
 {
     return cto_diferencia(A, B);
 }
+
+Conjunto c_ej2_pertenece(Conjunto A, int clave)
+{
+    return cto_pertenece(A, clave);
+}
 //==============================EJERCICIO 3=================================
 
 Conjunto c_ej3_uniones(Lista l_de_conjuntos)
