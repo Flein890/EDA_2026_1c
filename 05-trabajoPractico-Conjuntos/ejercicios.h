@@ -8,6 +8,7 @@
 Conjunto c_ej2_union(Conjunto A, Conjunto B);
 Conjunto c_ej2_interseccion(Conjunto A, Conjunto B);
 Conjunto c_ej2_diferencia(Conjunto A, Conjunto B);
+bool c_ej2_pertenece(Conjunto A, int clave);
 Conjunto c_ej3_uniones(Lista l_de_conjuntos);
 Conjunto c_ej3_intersecciones(Lista l_de_conjuntos);
 bool esSubconjunto(Conjunto A, Conjunto B);
